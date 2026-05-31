@@ -18,9 +18,14 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor: handle 401
+// Response interceptor: handle 401 and HTML fallback responses
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (typeof response.data === 'string' && response.data.startsWith('<!DOCTYPE html>')) {
+      return Promise.reject(new Error('API returned HTML instead of JSON. Check VITE_API_URL.'));
+    }
+    return response;
+  },
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('inkwave_token');

@@ -117,7 +117,10 @@ export default function HomePage() {
     params.limit = 6;
     setLoading(true);
     getPosts(params)
-      .then((res) => setPosts(res.data?.data?.posts || res.data?.posts || []))
+      .then((res) => {
+        const postsData = res.data?.data?.posts || res.data?.posts;
+        setPosts(Array.isArray(postsData) ? postsData : []);
+      })
       .catch(() => setPosts([]))
       .finally(() => setLoading(false));
   }, [activeCategory]);

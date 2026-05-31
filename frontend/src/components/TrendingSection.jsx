@@ -20,7 +20,10 @@ export default function TrendingSection() {
 
   useEffect(() => {
     getTrendingPosts()
-      .then((res) => setPosts(res.data?.data || res.data || []))
+      .then((res) => {
+        const data = res.data?.data || res.data;
+        setPosts(Array.isArray(data) ? data : []);
+      })
       .catch(() => setPosts([]))
       .finally(() => setLoading(false));
   }, []);

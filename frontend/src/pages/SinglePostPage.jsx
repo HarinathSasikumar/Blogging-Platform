@@ -230,7 +230,7 @@ export default function SinglePostPage() {
               {/* Tags */}
               {post.tags?.length > 0 && (
                 <div className="sp-tags">
-                  {post.tags.map((tag) => (
+                  {(Array.isArray(post.tags) ? post.tags : []).map((tag) => (
                     <Link key={tag} to={`/explore?q=${tag}`} className="tag">#{tag}</Link>
                   ))}
                 </div>

@@ -122,10 +122,9 @@ export default function PostCard({ post, featured = false }) {
           <p className="post-card__desc text-clamp-2">{post.description}</p>
         )}
 
-        {/* Tags */}
         {post.tags?.length > 0 && (
           <div className="post-card__tags">
-            {post.tags.slice(0, 3).map((tag) => (
+            {(Array.isArray(post.tags) ? post.tags : []).slice(0, 3).map((tag) => (
               <span key={tag} className="tag">{tag}</span>
             ))}
           </div>

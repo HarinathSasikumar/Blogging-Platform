@@ -33,7 +33,11 @@ const PostSchema = new mongoose.Schema(
     },
     tags: {
       type: [String],
-      set: (tags) => tags.map((tag) => tag.toLowerCase().trim()),
+      set: (tags) => {
+        if (!tags) return [];
+        const arr = Array.isArray(tags) ? tags : String(tags).split(',');
+        return arr.map((tag) => tag.toLowerCase().trim()).filter(Boolean);
+      },
     },
     category: {
       type: String,

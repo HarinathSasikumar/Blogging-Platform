@@ -50,7 +50,7 @@ export default function WritePage() {
           tags: p.tags || [],
           published: p.published !== false,
         });
-        if (p.featuredImage) setImagePreview(`/uploads/${p.featuredImage}`);
+        if (p.featuredImage) setImagePreview(`${import.meta.env.VITE_BACKEND_URL || ''}/uploads/${p.featuredImage}`);
       })
       .catch(() => toast.error('Failed to load post'))
       .finally(() => setLoading(false));

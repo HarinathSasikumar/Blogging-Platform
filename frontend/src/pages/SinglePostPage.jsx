@@ -135,7 +135,7 @@ export default function SinglePostPage() {
       if (post.featuredImage.startsWith('http') || post.featuredImage.startsWith('/')) {
         return post.featuredImage;
       }
-      return `/uploads/${post.featuredImage}`;
+      return `${import.meta.env.VITE_BACKEND_URL || ''}/uploads/${post.featuredImage}`;
     }
     const cat = post.category ? post.category.toLowerCase() : 'other';
     const supportedCategories = ['technology', 'programming', 'design', 'career', 'tutorial', 'business', 'science', 'health', 'lifestyle', 'travel'];

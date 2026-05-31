@@ -27,7 +27,7 @@ export default function UserAvatar({ user, size = 'md', className = '' }) {
   const { dim, font } = sizes[size] || sizes.md;
   const hue = stringToHue(user?.username || user?.email || '');
   const initials = getInitials(user?.username || user?.name || '');
-  const imgSrc = user?.profileImage ? `/uploads/${user.profileImage}` : null;
+  const imgSrc = user?.profileImage ? `${import.meta.env.VITE_BACKEND_URL || ''}/uploads/${user.profileImage}` : null;
 
   const style = {
     width: dim,

@@ -38,7 +38,8 @@ export default function RegisterPage() {
     try {
       const res = await registerUser({ username: form.username, email: form.email, password: form.password });
       register(res.data);
-      toast.success(`Welcome to HN BlogSphere, ${res.data.user?.username}! 🎉`);
+      const username = res.data.user?.username || res.data.user?.name || res.data.username || res.data.name;
+      toast.success(username ? `Welcome to HN BlogSphere, ${username}! 🎉` : `Welcome to HN BlogSphere! 🎉`);
       navigate('/dashboard');
     } catch (err) {
       const msg = err.response?.data?.message || 'Registration failed';

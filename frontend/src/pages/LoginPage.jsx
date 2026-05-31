@@ -34,7 +34,8 @@ export default function LoginPage() {
     try {
       const res = await loginUser(form);
       login(res.data);
-      toast.success(`Welcome back, ${res.data.user?.username}! 🎉`);
+      const username = res.data.user?.username || res.data.user?.name || res.data.username || res.data.name;
+      toast.success(username ? `Welcome back, ${username}! 🎉` : `Welcome back! 🎉`);
       navigate('/dashboard');
     } catch (err) {
       const msg = err.response?.data?.message || 'Invalid credentials';
